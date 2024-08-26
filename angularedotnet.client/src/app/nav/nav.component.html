@@ -1,0 +1,22 @@
+<nav *ngIf="router.url != '/logar'" class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="tarefas">ProEventos</a>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown" dropdown>
+          <a dropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            Luís
+          </a>
+          <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item">
+              Perfil
+            </a>
+            <div role="separator" class="divider"></div>
+            <a class="dropdown-item" href="#">
+              Sair
+            </a>
+          </div>
+        </li>
+      </ul>
+  </div>
+</nav>
