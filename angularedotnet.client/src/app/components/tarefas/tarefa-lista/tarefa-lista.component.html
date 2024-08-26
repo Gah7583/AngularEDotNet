@@ -1,0 +1,47 @@
+<div class="container">
+    <h2>Tarefas</h2>
+    <hr />
+    <br />
+    <button type="button" class="btn btn-secondary btn-sm col-sm-3 justify-content-start" (click)="filtrarConcluidos()">
+        {{filtrandoTarefasConcluidas ? 'Mostrar Todas as Tarefas' : 'Filtrar Tarefas Concluídas'}}
+    </button>
+    <button routerLink="/tarefas/criar" type="button" class="btn btn-success btn-sm col-sm-3 justify-content-end">Criar Tarefa</button>
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Data de Realização</th>
+                <th>Status</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="tarefas && tarefas.length">
+            <tr *ngFor="let tarefa of tarefas">
+                <td>{{tarefa.nome}}</td>
+                <td>{{tarefa.descricao}}</td>
+                <td>{{tarefa.dataDeRealizacao}}</td>
+                <td *ngIf="tarefa.status === 1">Pendente</td>
+                <td *ngIf="tarefa.status === 2">Concluído</td>
+                <td>
+                    <button (click)="patchTarefa(tarefa.id)" type="button" class="btn btn-success btn-sm col-sm-2">
+                        <i class="fa fa-check"></i>
+                    </button>&nbsp;
+                    <button (click)="getTarefa(tarefa.id)" type="button" class="btn btn-primary btn-sm col-sm-2">
+                        <i class="fa fa-edit"></i>
+                    </button>&nbsp;
+                    <button (click)="deleteTarefa(tarefa.id)" type="button" class="btn btn-danger btn-sm col-sm-2">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot *ngIf="!tarefas || !tarefas.length">
+            <tr>
+                <td colspan="5" class="text-center">
+                    <h4>Nenhuma tarefa encontrada!</h4>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

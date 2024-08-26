@@ -22,8 +22,6 @@ export class TarefaServico {
   }
 
   public postTarefa(tarefa: Tarefa): Observable<Tarefa> {
-    console.log(tarefa);
-    console.log(this.http.post<Tarefa>(this.baseURL, tarefa));
     return this.http.post<Tarefa>(this.baseURL, tarefa);
   }
 

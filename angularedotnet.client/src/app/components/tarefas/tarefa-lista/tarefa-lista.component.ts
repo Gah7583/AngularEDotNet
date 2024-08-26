@@ -1,24 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { Tarefa } from '../interfaces/Tarefa';
-import { TarefaServico } from '../servicos/tarefa.servico';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Tarefa } from '../../../interfaces/Tarefa';
+import { TarefaServico } from '../../../servicos/tarefa.servico';
 
 @Component({
-  selector: 'app-tarefas',
-  templateUrl: './tarefas.component.html',
-  styleUrls: ['./tarefas.component.css']
+  selector: 'app-tarefa-lista',
+  templateUrl: './tarefa-lista.component.html',
+  styleUrls: ['./tarefa-lista.component.css']
 })
-export class TarefasComponent implements OnInit {
-
+export class TarefaListaComponent {
+  public filtrandoTarefasConcluidas = false;
 
   ngOnInit(): void {
     this.getTarefas();
   }
 
   constructor(
-    private tarefaServico: TarefaServico
+    private tarefaServico: TarefaServico,
+    private router: Router
   ) { }
 
   public tarefas: Tarefa[] = [];
+
+  public filtrarConcluidos(): void {
+    if (this.filtrandoTarefasConcluidas) {
+      this.getTarefas();
+    }
+    else {
+      this.tarefas.filter((tarefa) => tarefa.status === 1);
+    }
+  };
 
   public getTarefas(): void {
     const observer = {
@@ -42,6 +53,7 @@ export class TarefasComponent implements OnInit {
 
   public getTarefa(id: any): void {
     this.tarefaServico.getTarefa(id);
+    this.router.navigate([`/tarefa/detalhe/${id}`]);
   }
 
   public postTarefa(): void {
@@ -68,4 +80,5 @@ export class TarefasComponent implements OnInit {
     this.tarefaServico.deleteTarefa(id);
     this.getTarefas();
   }
+
 }

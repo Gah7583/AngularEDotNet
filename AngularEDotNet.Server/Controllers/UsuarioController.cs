@@ -73,7 +73,7 @@ namespace AngularEDotNet.Server.Controllers
 
         // DELETE: Tarefas/Delete/5
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]

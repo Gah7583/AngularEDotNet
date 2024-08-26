@@ -10,12 +10,15 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { TarefasComponent } from './tarefas/tarefas.component';
-import { AtualizacaoComponent } from './atualizacao/atualizacao.component';
-import { NavComponent } from './nav/nav.component';
+import { LoginComponent } from './components/login/login.component';
+import { TarefasComponent } from './components/tarefas/tarefas.component';
+import { AtualizacaoComponent } from './components/atualizacao/atualizacao.component';
+import { NavComponent } from './components/nav/nav.component';
 
 import { TarefaServico } from './servicos/tarefa.servico';
+import { TarefaDetalheComponent } from './components/tarefas/tarefa-detalhe/tarefa-detalhe.component';
+import { TarefaListaComponent } from './components/tarefas/tarefa-lista/tarefa-lista.component';
+import { CadastroComponent } from './components/login/cadastro/cadastro.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { TarefaServico } from './servicos/tarefa.servico';
     LoginComponent,
     TarefasComponent,
     AtualizacaoComponent,
-    NavComponent
+    NavComponent,
+    TarefaDetalheComponent,
+    TarefaListaComponent,
+    CadastroComponent
   ],
   imports: [
     BrowserModule,
