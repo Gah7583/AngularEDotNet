@@ -25,9 +25,11 @@ export class TarefaListaComponent {
   public filtrarConcluidos(): void {
     if (this.filtrandoTarefasConcluidas) {
       this.getTarefas();
+      this.filtrandoTarefasConcluidas = !this.filtrandoTarefasConcluidas;
     }
     else {
-      this.tarefas.filter((tarefa) => tarefa.status === 1);
+      this.tarefas = this.tarefas.filter(tarefa => tarefa.status === 1);
+      this.filtrandoTarefasConcluidas = !this.filtrandoTarefasConcluidas;
     }
   };
 
@@ -53,7 +55,7 @@ export class TarefaListaComponent {
 
   public getTarefa(id: any): void {
     this.tarefaServico.getTarefa(id);
-    this.router.navigate([`/tarefa/detalhe/${id}`]);
+    this.router.navigate([`/tarefas/detalhe/${id}`]);
   }
 
   public postTarefa(): void {
@@ -72,12 +74,16 @@ export class TarefaListaComponent {
   public putTarefa(): void { }
 
   public patchTarefa(id: any): void {
-    this.tarefaServico.patchTarefa(id)
+    this.tarefaServico.patchTarefa(id).subscribe(
+      (response) => console.log(response)
+    );
     this.getTarefas();
   }
 
   public deleteTarefa(id: any): void {
-    this.tarefaServico.deleteTarefa(id);
+    this.tarefaServico.deleteTarefa(id).subscribe(
+      (response) => console.log(response)
+    );
     this.getTarefas();
   }
 

@@ -2,10 +2,12 @@
     <h2>Tarefas</h2>
     <hr />
     <br />
-    <button type="button" class="btn btn-secondary btn-sm col-sm-3 justify-content-start" (click)="filtrarConcluidos()">
+    <div class="d-flex justify-content-evenly mb-2">
+      <button type="button" class="btn btn-secondary btn-sm col-sm-2" (click)="filtrarConcluidos()">
         {{filtrandoTarefasConcluidas ? 'Mostrar Todas as Tarefas' : 'Filtrar Tarefas Concluídas'}}
-    </button>
-    <button routerLink="/tarefas/criar" type="button" class="btn btn-success btn-sm col-sm-3 justify-content-end">Criar Tarefa</button>
+      </button>
+      <button routerLink="/tarefas/criar" type="button" class="btn btn-success btn-sm col-sm-2">Criar Tarefa</button>
+    </div>
     <table class="table table-striped">
         <thead class="table-dark">
             <tr>

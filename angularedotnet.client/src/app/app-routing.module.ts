@@ -9,6 +9,7 @@ import { TarefaListaComponent } from './components/tarefas/tarefa-lista/tarefa-l
 import { CadastroComponent } from './components/login/cadastro/cadastro.component';
 
 const routes: Routes = [
+  { path: 'tarefas', redirectTo: 'tarefas/list' },
   {
     path: 'tarefas', component: TarefasComponent,
     children: [
