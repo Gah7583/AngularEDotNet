@@ -1,0 +1,22 @@
+<div class="container">
+    <form [formGroup]="form">
+        <div class="form-group mb-3">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" [ngClass]="{'is-invalid': form.get('nome').errors && form.get('nome').touched}" id="nome" formControlName="nome" placeholder="Insira o nome">
+            <small *ngIf="form.get('nome').hasError('required')" class="invalid-feedback">Nome é obrigatório.</small>
+            <small *ngIf="form.get('nome').hasError('maxLength')" class="invalid-feedback">Nome tem no máximo 100 caracteres.</small>
+        </div>
+        <div class="form-group mb-3">
+            <label for="descricao">Descrição</label>
+            <input type="text" class="form-control is-invalid" [ngClass]="{'is-invalid': form.get('descricao').errors && form.get('descricao').touched}" id="descricao" formControlName="descricao" placeholder="Insira a descrição">
+            <small *ngIf="form.get('descricao').hasError('required')" class="invalid-feedback">Descrição é obrigatório.</small>
+            <small *ngIf="form.get('descricao').hasError('maxLength')" class="invalid-feedback">Descrição tem no máximo 200 caracteres.</small>
+        </div>
+        <div class="form-group mb-3">
+            <label for="dataDeRealizacao">Data de Realização</label>
+            <input type="date" class="form-control is-invalid" [ngClass]="{'is-invalid': form.get('dataDeRealizacao').errors && form.get('dataDeRealizacao').touched}" id="dataDeRealizacao" formControlName="dataDeRealizacao" placeholder="Insira a data de realização">
+            <small *ngIf="form.get('dataDeRealizacao').hasError('required')" class="invalid-feedback">Data de realização é obrigatória.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Criar</button>
+    </form>
+</div>

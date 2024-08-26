@@ -5,7 +5,7 @@ import { Usuario } from '../interfaces/Usuario';
 
 @Injectable()
 
-export class TarefaServico {
+export class UsuarioServico {
   baseURL = 'https://localhost:7141/api/Usuario';
   constructor(private http: HttpClient) { }
 

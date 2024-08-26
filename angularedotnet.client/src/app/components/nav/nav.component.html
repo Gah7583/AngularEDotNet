@@ -1,6 +1,6 @@
-<nav *ngIf="router.url != '/logar'" class="navbar bg-body-tertiary mb-3">
+<nav *ngIf="router.url != '/usuario/logar' && router.url != '/usuario/cadastro'" class="navbar bg-body-tertiary mb-3">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="tarefas/lista">ProEventos</a>
+    <a class="navbar-brand" routerLink="/tarefas/lista">ProEventos</a>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown" dropdown>
           <a dropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -8,11 +8,11 @@
             Luís
           </a>
           <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" routerLink="atualizacao">
+            <a class="dropdown-item" routerLink="/usuario/atualizacao">
               Perfil
             </a>
             <div role="separator" class="divider"></div>
-            <a class="dropdown-item" routerLink="logar">
+            <a class="dropdown-item" routerLink="/usuario/logar">
               Sair
             </a>
           </div>

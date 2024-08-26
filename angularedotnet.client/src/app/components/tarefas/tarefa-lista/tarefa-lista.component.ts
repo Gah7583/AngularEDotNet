@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tarefa } from '../../../interfaces/Tarefa';
 import { TarefaServico } from '../../../servicos/tarefa.servico';
@@ -8,7 +8,7 @@ import { TarefaServico } from '../../../servicos/tarefa.servico';
   templateUrl: './tarefa-lista.component.html',
   styleUrls: ['./tarefa-lista.component.css']
 })
-export class TarefaListaComponent {
+export class TarefaListaComponent implements OnInit {
   public filtrandoTarefasConcluidas = false;
 
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class TarefaListaComponent {
   }
 
   public getTarefa(id: any): void {
-    this.tarefaServico.getTarefa(id);
+    this.tarefaServico.getTarefa(id).subscribe((response) => console.log(response));
     this.router.navigate([`/tarefas/detalhe/${id}`]);
   }
 

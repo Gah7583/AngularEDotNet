@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse'
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -10,15 +10,19 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/usuario/login/login.component';
 import { TarefasComponent } from './components/tarefas/tarefas.component';
-import { AtualizacaoComponent } from './components/atualizacao/atualizacao.component';
+import { AtualizacaoComponent } from './components/usuario/atualizacao/atualizacao.component';
 import { NavComponent } from './components/nav/nav.component';
 
 import { TarefaServico } from './servicos/tarefa.servico';
+import { UsuarioServico } from './servicos/usuario.servico';
+
 import { TarefaDetalheComponent } from './components/tarefas/tarefa-detalhe/tarefa-detalhe.component';
 import { TarefaListaComponent } from './components/tarefas/tarefa-lista/tarefa-lista.component';
-import { CadastroComponent } from './components/login/cadastro/cadastro.component';
+import { CadastroComponent } from './components/usuario/cadastro/cadastro.component';
+import { TarefaCriarComponent } from './components/tarefas/tarefa-criar/tarefa-criar.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -29,18 +33,21 @@ import { CadastroComponent } from './components/login/cadastro/cadastro.componen
     NavComponent,
     TarefaDetalheComponent,
     TarefaListaComponent,
-    CadastroComponent
+    CadastroComponent,
+    TarefaCriarComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot()
   ],
-  providers: [TarefaServico],
+  providers: [TarefaServico, UsuarioServico],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
