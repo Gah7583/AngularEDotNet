@@ -9,7 +9,7 @@
         <small *ngIf="form.get('senha')?.hasError('required')" class="invalid-feedback">Senha é obrigatória</small>
         <small *ngIf="form.get('senha')?.hasError('minlength')" class="invalid-feedback">Senha deve ter no mínimo 8 caracteres</small>
         <br />
-        <button routerLink="/tarefas/lista" type="submit" class="btn btn-dark">Cadastrar</button>
+        <button (click)="salvarUsuario()" routerLink="/tarefas/lista" type="submit" class="btn btn-dark">Cadastrar</button>
     </form>
     <br />
     <p><a routerLink="/user/logar">Já tenho uma conta</a></p>

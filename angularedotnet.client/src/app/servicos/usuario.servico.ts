@@ -13,15 +13,15 @@ export class UsuarioServico {
     return this.http.get<Usuario>(`${this.baseURL}/${id}`);
   }
 
-  public postTarefa(usuario: Usuario): Observable<Usuario> {
+  public postUsuario(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.baseURL, usuario);
   }
 
-  public putTarefa(usuario: Usuario): Observable<Usuario> {
+  public putUsuario(usuario: Usuario): Observable<Usuario> {
     return this.http.put<Usuario>(this.baseURL, usuario);
   }
 
-  public deleteTarefa(id: any): Observable<string> {
+  public deleteUsuario(id: any): Observable<string> {
     return this.http.delete<string>(`${this.baseURL}/${id}`);
   }
 }

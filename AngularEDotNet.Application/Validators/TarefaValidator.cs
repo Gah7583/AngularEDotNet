@@ -19,10 +19,6 @@ namespace AngularEDotNet.Service.Validators
             RuleFor(c => c.DataDeRealizacao)
                 .NotEmpty().WithMessage("Por favor insira uma data de realização")
                 .NotNull().WithMessage("Por favor insira uma data de realização");
-
-            RuleFor(c => c.Status)
-                .NotEmpty().WithMessage("Por favor insira o status da tarefa")
-                .NotNull().WithMessage("Por favor insira o status da tarefa");
         }
     }
 }

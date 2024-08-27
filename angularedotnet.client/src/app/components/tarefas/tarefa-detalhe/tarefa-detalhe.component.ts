@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Tarefa } from '../../../interfaces/Tarefa';
 import { TarefaServico } from '../../../servicos/tarefa.servico';
 
@@ -16,17 +16,16 @@ export class TarefaDetalheComponent implements OnInit {
     descricao: new FormControl('', [Validators.required, Validators.maxLength(200)]),
     dataDeRealizacao: new FormControl('', Validators.required)
   });
-  constructor(private router: ActivatedRoute, private tarefaServico: TarefaServico) { }
+  constructor(private activatedRoute: ActivatedRoute, private tarefaServico: TarefaServico, private router: Router) { }
 
   public carregarTarefa(): void {
-    const tarefaIdParam = this.router.snapshot.paramMap.get('id');
+    const tarefaIdParam = this.activatedRoute.snapshot.paramMap.get('id');
 
     if (tarefaIdParam !== null) {
       this.tarefaServico.getTarefa(tarefaIdParam).subscribe((tarefa: Tarefa) => {
         this.tarefa = { ...tarefa };
         this.form.patchValue(this.tarefa);
-      }
-      )
+      })
     }
   }
 
@@ -39,6 +38,7 @@ export class TarefaDetalheComponent implements OnInit {
           console.log(error);
         }
       );
+      this.router.navigate(['/tarefas/lista']);
     }
   }
 

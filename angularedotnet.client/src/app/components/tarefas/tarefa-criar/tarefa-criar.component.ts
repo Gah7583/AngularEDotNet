@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Tarefa } from '../../../interfaces/Tarefa';
 import { TarefaServico } from '../../../servicos/tarefa.servico';
 
@@ -20,16 +21,16 @@ export class TarefaCriarComponent implements OnInit {
   public salvarAlteracao(): void {
     if (this.form.valid) {
       this.tarefa = { ... this.form.value };
-      console.log(this.tarefa);
       this.tarefaServico.postTarefa(this.tarefa).subscribe(
         (response) => console.log(response),
         (error: any) => {
           console.log(error);
         }
       );
+      this.router.navigate(['/tarefas/lista']);
     }
   }
-  constructor(private tarefaServico: TarefaServico) { }
+  constructor(private tarefaServico: TarefaServico, private router: Router) { }
 
   ngOnInit(): void { }
 }

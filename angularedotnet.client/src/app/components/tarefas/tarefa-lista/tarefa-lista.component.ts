@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Tarefa } from '../../../interfaces/Tarefa';
 import { TarefaServico } from '../../../servicos/tarefa.servico';
 
@@ -17,7 +16,6 @@ export class TarefaListaComponent implements OnInit {
 
   constructor(
     private tarefaServico: TarefaServico,
-    private router: Router
   ) { }
 
   public tarefas: Tarefa[] = [];
@@ -51,19 +49,6 @@ export class TarefaListaComponent implements OnInit {
       error: (error: any) => console.log(error)
     };
     this.tarefaServico.getTarefasByUsuarioId(id).subscribe(observer);
-  }
-
-  public postTarefa(): void {
-    let tarefa: Tarefa = {
-      nome: "teste",
-      descricao: "Teste para ver se o problema é o GUID",
-      dataDeRealizacao: "2024-08-26",
-      status: 1,
-      usuarioId: "3FA85F64-5717-4562-B3FC-2C963F66AFA6"
-    }
-
-    this.tarefaServico.postTarefa(tarefa);
-    this.getTarefas();
   }
 
   public patchTarefa(id: any): void {
