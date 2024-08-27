@@ -1,23 +1,35 @@
-<form>
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" placeholder="Insira o email">
-    </div>
-    <div class="form-group">
-        <label for="senha">Senha:</label>
-        <input type="password" class="form-control" id="senha" placeholder="Insira a senha">
-    </div>
-    <div class="form-group">
-        <label for="telefone">Telefone:</label>
-        <input type="text" class="form-control" id="telefone" placeholder="Insira a telefone">
-    </div>
-    <div class="form-group">
-        <label for="dataDeNascimento">Data de Nascimento:</label>
-        <input type="date" class="form-control" id="dataDeNascimento" placeholder="Insira a data de nascimento">
-    </div>
-    <div class="form-group">
-        <label for="genero">Gênero:</label>
-        <input type="text" class="form-control" id="genero" placeholder="Insira o gênero">
-    </div>
-    <button type="submit" class="btn btn-primary">Atualizar</button>
-</form>
+<div class="container">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input formControlName="email" [ngClass]="{'is-invalid': form.get('email')?.errors && form.get('email')?.touched}" type="email" class="form-control mb-3" id="email" placeholder="Insira o email">
+            <small *ngIf="form.get('email')?.hasError('required')" class="invalid-feedback">E-mail é obrigatório.</small>
+            <small *ngIf="form.get('email')?.hasError('email')" class="invalid-feedback">Necessita ser um e-mail válido.</small>
+            <small *ngIf="form.get('email')?.hasError('maxlength')" class="invalid-feedback">E-mail deve ter no máximo 320 caracteres.</small>
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input formControlName="senha" [ngClass]="{'is-invalid': form.get('senha')?.errors && form.get('senha')?.touched}" type="password" class="form-control mb-3" id="senha" placeholder="Insira a senha">
+            <small *ngIf="form.get('senha')?.hasError('required')" class="invalid-feedback">Senha é obrigatória</small>
+            <small *ngIf="form.get('senha')?.hasError('minlength')" class="invalid-feedback">Senha deve ter no mínimo 8 caracteres</small>
+        </div>
+        <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input type="text" class="form-control mb-3" id="telefone" placeholder="Insira a telefone">
+        </div>
+        <div class="form-group">
+            <label for="dataDeNascimento">Data de Nascimento:</label>
+            <input type="date" class="form-control mb-3" id="dataDeNascimento" placeholder="Insira a data de nascimento">
+        </div>
+        <div class="form-group">
+            <label for="genero">Gênero:</label>
+            <select class="form-control mb-3" id="genero">
+                <option>--------</option>
+                <option value="1">Masculino</option>
+                <option value="2">Feminino</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary m-5" routerLink="/tarefas/lista">Voltar</button>
+        <button type="submit" class="btn btn-success">Atualizar</button>
+    </form>
+</div>

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AngularEDotNet.Infra.Data.Migrations
 {
     [DbContext(typeof(AngularEDotNetContext))]
-    [Migration("20240824213630_Initial")]
+    [Migration("20240827055015_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -53,11 +53,10 @@ namespace AngularEDotNet.Infra.Data.Migrations
                         .HasColumnName("Status");
 
                     b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("UsuarioId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Tarefas");
                 });
@@ -95,22 +94,6 @@ namespace AngularEDotNet.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("AngularEDotNet.Domain.Entidades.Tarefa", b =>
-                {
-                    b.HasOne("AngularEDotNet.Domain.Entidades.Usuario", "Usuario")
-                        .WithMany("Tarefas")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("AngularEDotNet.Domain.Entidades.Usuario", b =>
-                {
-                    b.Navigation("Tarefas");
                 });
 #pragma warning restore 612, 618
         }

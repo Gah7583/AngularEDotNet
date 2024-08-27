@@ -50,11 +50,10 @@ namespace AngularEDotNet.Infra.Data.Migrations
                         .HasColumnName("Status");
 
                     b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("UsuarioId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Tarefas");
                 });
@@ -92,22 +91,6 @@ namespace AngularEDotNet.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("AngularEDotNet.Domain.Entidades.Tarefa", b =>
-                {
-                    b.HasOne("AngularEDotNet.Domain.Entidades.Usuario", "Usuario")
-                        .WithMany("Tarefas")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("AngularEDotNet.Domain.Entidades.Usuario", b =>
-                {
-                    b.Navigation("Tarefas");
                 });
 #pragma warning restore 612, 618
         }

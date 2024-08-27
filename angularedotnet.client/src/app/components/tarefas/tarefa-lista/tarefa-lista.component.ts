@@ -53,11 +53,6 @@ export class TarefaListaComponent implements OnInit {
     this.tarefaServico.getTarefasByUsuarioId(id).subscribe(observer);
   }
 
-  public getTarefa(id: any): void {
-    this.tarefaServico.getTarefa(id).subscribe((response) => console.log(response));
-    this.router.navigate([`/tarefas/detalhe/${id}`]);
-  }
-
   public postTarefa(): void {
     let tarefa: Tarefa = {
       nome: "teste",
@@ -70,8 +65,6 @@ export class TarefaListaComponent implements OnInit {
     this.tarefaServico.postTarefa(tarefa);
     this.getTarefas();
   }
-
-  public putTarefa(): void { }
 
   public patchTarefa(id: any): void {
     this.tarefaServico.patchTarefa(id).subscribe(

@@ -26,7 +26,7 @@ namespace AngularEDotNet.Domain.Entidades
 
         [Column("Status")]
         [Required(ErrorMessage = "Status necessário")]
-        public Status Status { get; set; }
+        public Status Status { get; set; } = Status.Pendente;
 
         [Column("UsuarioId")]
         [Required(ErrorMessage = "Usuário necessário")]

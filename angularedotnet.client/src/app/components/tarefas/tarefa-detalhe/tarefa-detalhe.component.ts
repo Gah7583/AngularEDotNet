@@ -1,23 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Tarefa } from '../../../interfaces/Tarefa';
+import { TarefaServico } from '../../../servicos/tarefa.servico';
 
 @Component({
   selector: 'app-tarefa-detalhe',
   templateUrl: './tarefa-detalhe.component.html',
   styleUrls: ['./tarefa-detalhe.component.css']
 })
-export class TarefaDetalheComponent implements OnInit{
-  form: FormGroup = new FormGroup({});
-  constructor() { }
+export class TarefaDetalheComponent implements OnInit {
+  tarefa = {} as Tarefa;
+  form: FormGroup = new FormGroup({
+    nome: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+    descricao: new FormControl('', [Validators.required, Validators.maxLength(200)]),
+    dataDeRealizacao: new FormControl('', Validators.required)
+  });
+  constructor(private router: ActivatedRoute, private tarefaServico: TarefaServico) { }
 
-  ngOnInit(): void {}
+  public carregarTarefa(): void {
+    const tarefaIdParam = this.router.snapshot.paramMap.get('id');
 
-  public validation(): void {
-    this.form = new FormGroup({
-      nome: new FormControl(),
-      descricao: new FormControl(),
-      dataDeRealizacao: new FormControl()
-});
+    if (tarefaIdParam !== null) {
+      this.tarefaServico.getTarefa(tarefaIdParam).subscribe((tarefa: Tarefa) => {
+        this.tarefa = { ...tarefa };
+        this.form.patchValue(this.tarefa);
+      }
+      )
+    }
   }
+
+  public salvarAlteracao(): void {
+    if (this.form.valid) {
+      this.tarefa = { ...this.tarefa, ... this.form.value };
+      this.tarefaServico.putTarefa(this.tarefa).subscribe(
+        (response) => console.log(response),
+        (error: any) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  ngOnInit(): void { this.carregarTarefa() }
 }

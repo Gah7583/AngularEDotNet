@@ -1,11 +1,14 @@
 <div class="container">
-  <form>
-      <input style="display: inline-block; width: 250px; margin: 10px;" class="form-control" type="email" id="email" name="email" placeholder="Email" required>
-      <br />
-      <input style="display: inline-block; width: 250px; margin: 10px; " class="form-control" type="password" id="senha" name="senha" placeholder="Senha" required>
-      <br />
-      <button routerLink="/tarefas/lista" type="submit" class="btn btn-dark">Logar</button>
-  </form>
+    <form [formGroup]="form">
+        <input formControlName="email" [ngClass]="{'is-invalid': form.get('email')?.errors && form.get('email')?.touched}" style="display: inline-block; width: 250px; margin: 10px;" class="form-control" type="email" id="email" name="email" placeholder="Email" required>
+        <small *ngIf="form.get('email')?.hasError('required')" class="invalid-feedback">E-mail é obrigatório.</small>
+        <small *ngIf="form.get('email')?.hasError('email')" class="invalid-feedback">Necessita ser um e-mail válido.</small>
+        <br />
+        <input formControlName="senha" [ngClass]="{'is-invalid': form.get('senha')?.errors && form.get('senha')?.touched}" style="display: inline-block; width: 250px; margin: 10px; " class="form-control" type="password" id="senha" name="senha" placeholder="Senha" required>
+        <small *ngIf="form.get('senha')?.hasError('required')" class="invalid-feedback">Senha é obrigatória</small>
+        <br />
+        <button routerLink="/tarefas/lista" type="submit" class="btn btn-dark">Logar</button>
+    </form>
   <br />
   <p>Não tem uma conta? <a routerLink="/usuario/cadastro">Cadastre-se agora</a></p>
 </div>
