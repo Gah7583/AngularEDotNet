@@ -31,5 +31,11 @@ namespace AngularEDotNet.Domain.Entidades
 
         [Column("Genero")]
         public Genero? Genero { get; set; }
+
+        [Column("Refresh Token")]
+        public string? RefreshToken { get; set; }
+
+        [Column("Refresh Token Expiry Time")]
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }

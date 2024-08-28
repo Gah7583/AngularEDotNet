@@ -79,6 +79,14 @@ namespace AngularEDotNet.Infra.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Genero");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Refresh Token");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("Refresh Token Expiry Time");
+
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")

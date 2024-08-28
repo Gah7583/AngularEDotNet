@@ -7,4 +7,6 @@ export interface Usuario {
   telefone?: string;
   dataDeNascimento?: Date;
   genero?: Genero;
+  token: string;
+  tokenExpiryTime: Date;
 }
