@@ -9,10 +9,6 @@ export class TarefaServico {
   baseURL = 'https://localhost:7141/api/Tarefas';
   constructor(private http: HttpClient) { }
 
-  public getTarefas(): Observable<Tarefa[]> {
-    return this.http.get<Tarefa[]>(this.baseURL);
-  }
-
   public getTarefasByUsuarioId(usuarioId: any): Observable<Tarefa[]> {
     return this.http.get<Tarefa[]>(`${this.baseURL}/usuario/${usuarioId}`);
   }

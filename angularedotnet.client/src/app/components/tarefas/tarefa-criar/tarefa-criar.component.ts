@@ -21,6 +21,7 @@ export class TarefaCriarComponent implements OnInit {
   public salvarAlteracao(): void {
     if (this.form.valid) {
       this.tarefa = { ... this.form.value };
+      this.tarefa.usuarioId = localStorage.getItem('userId');
       this.tarefaServico.postTarefa(this.tarefa).subscribe(
         (response) => console.log(response),
         (error: any) => {

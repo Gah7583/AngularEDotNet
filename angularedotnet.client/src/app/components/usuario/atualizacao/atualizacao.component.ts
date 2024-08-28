@@ -20,14 +20,10 @@ export class AtualizacaoComponent implements OnInit {
   constructor(private activetedRouter: ActivatedRoute, private usuarioServico: UsuarioServico, private router: Router) { }
 
   public carregarUsuario(): void {
-    const usuarioIdParam = this.activetedRouter.snapshot.paramMap.get("id");
-
-    if (usuarioIdParam !== null) {
-      this.usuarioServico.getUsuario(usuarioIdParam).subscribe((usuario: Usuario) => {
+    this.usuarioServico.getUsuario(localStorage.getItem('userId')).subscribe((usuario: Usuario) => {
         this.usuario = { ...usuario };
         this.form.patchValue(this.usuario);
       })
-    }
   }
 
   public salvarAlteracao(): void {

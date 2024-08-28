@@ -17,7 +17,6 @@ namespace AngularEDotNet.Server.Controllers
         {
             if (usuario == null) return BadRequest("Requisição inválida");
             var token = _autenticacaoService.ValidateCredentials(usuario);
-            if (token == null) return Unauthorized();
             return Ok(token);
         }
 

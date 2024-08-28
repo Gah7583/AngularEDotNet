@@ -23,6 +23,7 @@ import { TarefaListaComponent } from './components/tarefas/tarefa-lista/tarefa-l
 import { CadastroComponent } from './components/usuario/cadastro/cadastro.component';
 import { TarefaCriarComponent } from './components/tarefas/tarefa-criar/tarefa-criar.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
+import { AutenticacaoServico } from './servicos/autenticacao.servico';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot()
   ],
-  providers: [TarefaServico, UsuarioServico],
+  providers: [TarefaServico, UsuarioServico, AutenticacaoServico],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,7 +11,7 @@ export class TarefaListaComponent implements OnInit {
   public filtrandoTarefasConcluidas = false;
 
   ngOnInit(): void {
-    this.getTarefas();
+    this.getTarefasByUsuarioId(localStorage.getItem('id'));
   }
 
   constructor(
@@ -22,7 +22,7 @@ export class TarefaListaComponent implements OnInit {
 
   public filtrarConcluidos(): void {
     if (this.filtrandoTarefasConcluidas) {
-      this.getTarefas();
+      this.getTarefasByUsuarioId(localStorage.getItem('id'));
       this.filtrandoTarefasConcluidas = !this.filtrandoTarefasConcluidas;
     }
     else {
@@ -30,16 +30,6 @@ export class TarefaListaComponent implements OnInit {
       this.filtrandoTarefasConcluidas = !this.filtrandoTarefasConcluidas;
     }
   };
-
-  public getTarefas(): void {
-    const observer = {
-      next: (tarefas: Tarefa[]) => {
-        this.tarefas = tarefas;
-      },
-      error: (error: any) => console.log(error)
-    };
-    this.tarefaServico.getTarefas().subscribe(observer);
-  }
 
   public getTarefasByUsuarioId(id: any): void {
     const observer = {
@@ -55,14 +45,14 @@ export class TarefaListaComponent implements OnInit {
     this.tarefaServico.patchTarefa(id).subscribe(
       (response) => console.log(response)
     );
-    this.getTarefas();
+    this.getTarefasByUsuarioId(localStorage.getItem('id'));
   }
 
   public deleteTarefa(id: any): void {
     this.tarefaServico.deleteTarefa(id).subscribe(
       (response) => console.log(response)
     );
-    this.getTarefas();
+    this.getTarefasByUsuarioId(localStorage.getItem('id'));
   }
 
 }

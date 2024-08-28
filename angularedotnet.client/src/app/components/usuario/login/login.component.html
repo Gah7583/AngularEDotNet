@@ -7,7 +7,7 @@
         <input formControlName="senha" [ngClass]="{'is-invalid': form.get('senha')?.errors && form.get('senha')?.touched}" style="display: inline-block; width: 250px; margin: 10px; " class="form-control" type="password" id="senha" name="senha" placeholder="Senha" required>
         <small *ngIf="form.get('senha')?.hasError('required')" class="invalid-feedback">Senha é obrigatória</small>
         <br />
-        <button routerLink="/tarefas/lista" type="submit" class="btn btn-dark">Logar</button>
+        <button (click)="logar()" type="submit" class="btn btn-dark">Logar</button>
     </form>
   <br />
   <p>Não tem uma conta? <a routerLink="/usuario/cadastro">Cadastre-se agora</a></p>
