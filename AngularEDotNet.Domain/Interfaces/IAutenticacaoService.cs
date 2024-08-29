@@ -4,7 +4,7 @@ namespace AngularEDotNet.Domain.Interfaces
 {
     public interface IAutenticacaoService
     {
-        (string, string) ValidateCredentials(Usuario usuario);
+        (string token, Guid userId) ValidateCredentials(Usuario usuario);
         Token ValidateCredentials(Token token);
         bool RevokeToken(string userEmail);
     }

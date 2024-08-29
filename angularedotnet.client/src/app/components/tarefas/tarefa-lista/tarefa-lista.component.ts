@@ -11,7 +11,7 @@ export class TarefaListaComponent implements OnInit {
   public filtrandoTarefasConcluidas = false;
 
   ngOnInit(): void {
-    this.getTarefasByUsuarioId(localStorage.getItem('id'));
+    this.getTarefasByUsuarioId(localStorage.getItem('userId'));
   }
 
   constructor(
@@ -22,7 +22,7 @@ export class TarefaListaComponent implements OnInit {
 
   public filtrarConcluidos(): void {
     if (this.filtrandoTarefasConcluidas) {
-      this.getTarefasByUsuarioId(localStorage.getItem('id'));
+      this.getTarefasByUsuarioId(localStorage.getItem('userId'));
       this.filtrandoTarefasConcluidas = !this.filtrandoTarefasConcluidas;
     }
     else {
@@ -45,14 +45,14 @@ export class TarefaListaComponent implements OnInit {
     this.tarefaServico.patchTarefa(id).subscribe(
       (response) => console.log(response)
     );
-    this.getTarefasByUsuarioId(localStorage.getItem('id'));
+    this.getTarefasByUsuarioId(localStorage.getItem('userId'));
   }
 
   public deleteTarefa(id: any): void {
     this.tarefaServico.deleteTarefa(id).subscribe(
       (response) => console.log(response)
     );
-    this.getTarefasByUsuarioId(localStorage.getItem('id'));
+    this.getTarefasByUsuarioId(localStorage.getItem('userId'));
   }
 
 }

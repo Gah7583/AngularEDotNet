@@ -23,7 +23,9 @@ export class LoginComponent implements OnInit {
       this.autenticacaoServico.login(this.usuario).subscribe(
         (response) => { console.log(response); }
       );
-      this.router.navigate(['/tarefas/lista']);
+      if (localStorage.getItem("userId") !== null) {
+        this.router.navigate(['/tarefas/lista/']);
+      }
     }
   }
 

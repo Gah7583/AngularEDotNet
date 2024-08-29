@@ -10,7 +10,9 @@ export class TarefaServico {
   constructor(private http: HttpClient) { }
 
   public getTarefasByUsuarioId(usuarioId: any): Observable<Tarefa[]> {
-    return this.http.get<Tarefa[]>(`${this.baseURL}/usuario/${usuarioId}`);
+    var url = (`${this.baseURL}/usuario/` + usuarioId);
+    console.log(url);
+    return this.http.get<Tarefa[]>(`${this.baseURL}/usuario/` + usuarioId);
   }
 
   public getTarefa(id: any): Observable<Tarefa> {

@@ -16,8 +16,8 @@ export class AutenticacaoServico {
         console.log(response);
       const user = response;
         if (user) {
-          localStorage.setItem('userId', JSON.stringify(user));
-          localStorage.setItem('token', JSON.stringify(user))
+          localStorage.setItem('userId', JSON.stringify(user.item2));
+          localStorage.setItem('token', JSON.stringify(user.item1));
       }
     })
     );
