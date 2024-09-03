@@ -13,8 +13,11 @@ export class AtualizacaoComponent implements OnInit {
   usuario = {} as Usuario;
 
   form: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(320)]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(8)])
+    email: new FormControl([Validators.required, Validators.email, Validators.maxLength(320)]),
+    senha: new FormControl([Validators.required, Validators.minLength(8)]),
+    telefone: new FormControl(),
+    dataDeNascimento: new FormControl(),
+    genero: new FormControl(),
   });
 
   constructor(private activetedRouter: ActivatedRoute, private usuarioServico: UsuarioServico, private router: Router) { }

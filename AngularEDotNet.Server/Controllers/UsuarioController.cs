@@ -55,7 +55,7 @@ namespace AngularEDotNet.Server.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPut]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> PutAsync([Bind("Id,Email,Senha,Telefone,DataDeNascimento,Genero")] Usuario model)
+        public async Task<IActionResult> PutAsync([FromBody]Usuario model)
         {
             try
             {
@@ -90,6 +90,6 @@ namespace AngularEDotNet.Server.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     $"Erro ao tentar deletar usuário. Erro: {ex.Message}");
             }
-        }
+        }   
     }
 }

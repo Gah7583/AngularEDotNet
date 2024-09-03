@@ -21,11 +21,12 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.usuario = { ... this.form.value };
       this.autenticacaoServico.login(this.usuario).subscribe(
-        (response) => { console.log(response); }
+        (response) => {
+          if (response !== null) {
+            this.router.navigate(['/tarefas/lista']);
+          }
+}
       );
-      if (localStorage.getItem("userId") !== null) {
-        this.router.navigate(['/tarefas/lista/']);
-      }
     }
   }
 

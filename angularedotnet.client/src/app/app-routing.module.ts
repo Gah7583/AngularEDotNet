@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'tarefas', component: TarefasComponent,
     children: [
-      { path: 'lista/:id', component: TarefaListaComponent },
+      { path: 'lista', component: TarefaListaComponent },
       { path: 'detalhe/:id', component: TarefaDetalheComponent },
       { path: 'criar', component: TarefaCriarComponent }
     ]

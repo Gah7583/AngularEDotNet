@@ -13,12 +13,11 @@ export class AutenticacaoServico {
     return this.http.post<Usuario>(this.baseURL + '/signin', model).pipe(
       take(1),
       map((response: any) => {
-        console.log(response);
       const user = response;
         if (user) {
-          localStorage.setItem('userId', JSON.stringify(user.item2));
-          localStorage.setItem('token', JSON.stringify(user.item1));
-      }
+          localStorage.setItem('userId', JSON.stringify(user.item2).replace(/"/g, ''));
+          localStorage.setItem('token', JSON.stringify(user.item1).replace(/"/g, ''));
+        }
     })
     );
   }

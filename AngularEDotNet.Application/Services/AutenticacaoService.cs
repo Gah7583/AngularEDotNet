@@ -18,10 +18,10 @@ namespace AngularEDotNet.Service.Services
             return _repository.RevokeToken(userEmail);
         }
 
-        public (string token, Guid userId) ValidateCredentials(Usuario usuario)
+        public Tuple<string, Guid>? ValidateCredentials(Usuario usuario)
         {
             var user = _repository.ValidateCredentials(usuario);
-            if (user == null) throw new Exception("Usuário Inválido");
+            if (user == null) return null;
             var claims = new List<Claim>
             {
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
@@ -37,8 +37,9 @@ namespace AngularEDotNet.Service.Services
 
             DateTime createDate = DateTime.Now;
             DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes);
+            var userData = Tuple.Create(acessToken, user.Id);
 
-            return (acessToken, user.Id);
+            return userData;
         }
 
         public Token ValidateCredentials(Token token)

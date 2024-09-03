@@ -18,6 +18,9 @@ export class UsuarioServico {
   }
 
   public putUsuario(usuario: Usuario): Observable<Usuario> {
+    console.log(usuario.genero);
+    usuario.genero = Number(usuario.genero);
+    console.log(usuario);
     return this.http.put<Usuario>(this.baseURL, usuario);
   }
 

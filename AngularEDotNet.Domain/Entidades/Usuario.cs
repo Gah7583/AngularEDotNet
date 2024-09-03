@@ -36,6 +36,6 @@ namespace AngularEDotNet.Domain.Entidades
         public string? RefreshToken { get; set; }
 
         [Column("Refresh Token Expiry Time")]
-        public DateTime RefreshTokenExpiryTime { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }
     }
 }

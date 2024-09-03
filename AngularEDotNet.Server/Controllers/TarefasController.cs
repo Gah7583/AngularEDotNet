@@ -54,9 +54,9 @@ namespace AngularEDotNet.Server.Controllers
             }
         }
 
-        // GET: Tarefa by id
+        // GET: Tarefa by usuarioId
         [HttpGet("usuario/{usuarioId}")]
-        [ProducesResponseType(200, Type = typeof(Tarefa))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Tarefa>))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
