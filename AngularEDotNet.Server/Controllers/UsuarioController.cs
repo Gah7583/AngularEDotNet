@@ -40,6 +40,7 @@ namespace AngularEDotNet.Server.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
+        [Authorize("Bearer")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             try

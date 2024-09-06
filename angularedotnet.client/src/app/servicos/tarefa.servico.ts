@@ -16,7 +16,6 @@ export class TarefaServico {
   constructor(private http: HttpClient) { }
 
   public getTarefasByUsuarioId(usuarioId: string): Observable<Tarefa[]> {
-    console.log(this.httpOptions.headers.get('Authorization'));
     return this.http.get<Tarefa[]>(`${this.baseURL}/usuario/${usuarioId}`, this.httpOptions);
   }
 

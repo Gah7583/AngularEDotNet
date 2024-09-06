@@ -17,21 +17,17 @@ export class UsuarioServico {
   constructor(private http: HttpClient) { }
 
   public getUsuario(id: any): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.baseURL}/${id}`);
+    return this.http.get<Usuario>(`${this.baseURL}/${id}`, this.httpOptions);
   }
 
   public postUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.baseURL, usuario);
+    return this.http.post<Usuario>(this.baseURL, usuario, this.httpOptions);
   }
 
   public putUsuario(usuario: Usuario): Observable<Usuario> {
     console.log(usuario.genero);
     usuario.genero = Number(usuario.genero);
     console.log(usuario);
-    return this.http.put<Usuario>(this.baseURL, usuario);
-  }
-
-  public deleteUsuario(id: any): Observable<string> {
-    return this.http.delete<string>(`${this.baseURL}/${id}`);
+    return this.http.put<Usuario>(this.baseURL, usuario, this.httpOptions);
   }
 }
