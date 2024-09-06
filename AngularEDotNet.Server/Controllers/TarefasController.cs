@@ -1,36 +1,18 @@
 ﻿using AngularEDotNet.Domain.Entidades;
 using AngularEDotNet.Domain.Interfaces;
 using AngularEDotNet.Service.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AngularEDotNet.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/v{version:ApiVersion}")]
     [ApiController]
+    [ApiVersion("1")]
+    [Authorize("Bearer")]
     public class TarefasController(ITarefaService tarefaService) : ControllerBase
     {
         private readonly ITarefaService _tarefaService = tarefaService;
-
-        [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Tarefa>))]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        // GET: Tarefas
-        public async Task<IActionResult> GetAsync()
-        {
-            try
-            {
-                var tarefas = await _tarefaService.Get();
-                if (tarefas == null) return NotFound("Nenhuma tarefa encontrada");
-
-                return Ok(tarefas);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar recuperar tarefas. Erro: {ex.Message}");
-            }
-        }
 
         // GET: Tarefa by id
         [HttpGet("{id}")]
@@ -38,6 +20,7 @@ namespace AngularEDotNet.Server.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             try
@@ -60,6 +43,7 @@ namespace AngularEDotNet.Server.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> GetByUsuarioIdAsync(Guid usuarioId)
         {
             try
@@ -81,6 +65,7 @@ namespace AngularEDotNet.Server.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> PostAsync(Tarefa model)
         {
             try
@@ -103,6 +88,7 @@ namespace AngularEDotNet.Server.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> PutAsync([Bind("Id,Nome,Descricao,DataDeRealizacao,Status,usuarioId")] Tarefa model)
         {
             try
@@ -124,6 +110,7 @@ namespace AngularEDotNet.Server.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
+        [MapToApiVersion("1")]
         public IActionResult Patch(Guid id)
         {
             var tarefa = _tarefaService.Concluir(id);
@@ -137,6 +124,7 @@ namespace AngularEDotNet.Server.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             try

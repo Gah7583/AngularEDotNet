@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AngularEDotNet.Server.Controllers
 {
-    [Route("api/[controller]/")]
+    [ApiVersion("1.0")]
+    [Route("api/[controller]/v{version:ApiVersion}")]
     [ApiController]
     public class AutenticacaoController(IAutenticacaoService autenticacaoService) : ControllerBase
     {

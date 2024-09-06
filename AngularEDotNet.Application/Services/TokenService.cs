@@ -1,6 +1,5 @@
 ﻿using AngularEDotNet.Domain.Entidades;
 using AngularEDotNet.Domain.Interfaces;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -19,7 +18,7 @@ namespace AngularEDotNet.Service.Services
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
             var tokenOptions = new JwtSecurityToken(
-            issuer: _tokenConfiguration.Issuer,
+                issuer: _tokenConfiguration.Issuer,
                 audience: _tokenConfiguration.Audience,
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(_tokenConfiguration.Minutes),

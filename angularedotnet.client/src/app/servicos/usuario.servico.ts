@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from '../interfaces/Usuario';
@@ -6,7 +6,14 @@ import { Usuario } from '../interfaces/Usuario';
 @Injectable()
 
 export class UsuarioServico {
-  baseURL = 'https://localhost:7141/api/Usuario';
+  baseURL = 'https://localhost:7141/api/Usuario/v1';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('bearer')
+    })
+  }
+
   constructor(private http: HttpClient) { }
 
   public getUsuario(id: any): Observable<Usuario> {

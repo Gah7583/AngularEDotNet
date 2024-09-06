@@ -1,17 +1,23 @@
 ﻿using AngularEDotNet.Domain.Entidades;
 using AngularEDotNet.Domain.Interfaces;
 using AngularEDotNet.Service.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AngularEDotNet.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/v{version:ApiVersion}")]
     [ApiController]
+    [ApiVersion("1")]
     public class UsuarioController(IBaseService<Usuario> usuarioService) : ControllerBase
     {
         private readonly IBaseService<Usuario> _usuarioService = usuarioService;
 
         [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [MapToApiVersion("1")]
         public async Task<IActionResult> PostAsync([Bind("Email,Senha")] Usuario model)
         {
             try
@@ -28,7 +34,7 @@ namespace AngularEDotNet.Server.Controllers
             }
         }
 
-        // GET: Tarefa by id
+        // GET: usuario by id
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(204)]
@@ -51,11 +57,13 @@ namespace AngularEDotNet.Server.Controllers
         }
 
         // PUT: Usuario
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPut]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> PutAsync([FromBody]Usuario model)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [MapToApiVersion("1")]
+        [Authorize("Bearer")]
+        public async Task<IActionResult> PutAsync([Bind("")]Usuario model)
         {
             try
             {
@@ -70,26 +78,5 @@ namespace AngularEDotNet.Server.Controllers
                     $"Erro ao tentar atualizar usuário. Erro: {ex.Message}");
             }
         }
-
-        // DELETE: Tarefas/Delete/5
-
-        [HttpDelete("{id}")]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        public async Task<IActionResult> DeleteAsync(Guid id)
-        {
-            try
-            {
-                return await _usuarioService.Delete(id) ?
-                    Ok("Deletado") :
-                    BadRequest("Usuário não deletado.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar deletar usuário. Erro: {ex.Message}");
-            }
-        }   
     }
 }

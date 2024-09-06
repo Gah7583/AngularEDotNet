@@ -1,6 +1,6 @@
 @AngularEDotNet.Server_HostAddress = http://localhost:5058
 
-GET {{AngularEDotNet.Server_HostAddress}}/weatherforecast/
+GET {{AngularEDotNet.Server_HostAddress}}
 Accept: application/json
 
 ###

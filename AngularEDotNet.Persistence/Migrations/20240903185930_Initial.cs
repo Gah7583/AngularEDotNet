@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AngularEDotNet.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Add : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,7 +38,7 @@ namespace AngularEDotNet.Infra.Data.Migrations
                     DatadeNascimento = table.Column<DateOnly>(name: "Data de Nascimento", type: "date", nullable: true),
                     Genero = table.Column<int>(type: "int", nullable: true),
                     RefreshToken = table.Column<string>(name: "Refresh Token", type: "nvarchar(max)", nullable: true),
-                    RefreshTokenExpiryTime = table.Column<DateTime>(name: "Refresh Token Expiry Time", type: "datetime2", nullable: false)
+                    RefreshTokenExpiryTime = table.Column<DateTime>(name: "Refresh Token Expiry Time", type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {

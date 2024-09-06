@@ -18,7 +18,7 @@ namespace AngularEDotNet.Service.Services
             return _repository.RevokeToken(userEmail);
         }
 
-        public Tuple<string, Guid>? ValidateCredentials(Usuario usuario)
+        public Tuple<Token, Guid>? ValidateCredentials(Usuario usuario)
         {
             var user = _repository.ValidateCredentials(usuario);
             if (user == null) return null;
@@ -37,7 +37,10 @@ namespace AngularEDotNet.Service.Services
 
             DateTime createDate = DateTime.Now;
             DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes);
-            var userData = Tuple.Create(acessToken, user.Id);
+
+            Token token = new (true, createDate.ToString(DATE_FORMAT), expirationDate.ToString(DATE_FORMAT), acessToken, refreshToken);
+
+            var userData = Tuple.Create(token, user.Id);
 
             return userData;
         }

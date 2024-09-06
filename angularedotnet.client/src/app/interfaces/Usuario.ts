@@ -1,4 +1,5 @@
 import { Genero } from "../enums/Genero";
+import { Token } from "./Token";
 
 export interface Usuario {
   id?: any;
@@ -7,6 +8,4 @@ export interface Usuario {
   telefone?: string;
   dataDeNascimento?: Date;
   genero?: Genero;
-  token?: string;
-  tokenExpiryTime?: Date;
 }

@@ -83,7 +83,7 @@ namespace AngularEDotNet.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Refresh Token");
 
-                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("Refresh Token Expiry Time");
 

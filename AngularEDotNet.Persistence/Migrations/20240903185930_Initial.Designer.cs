@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AngularEDotNet.Infra.Data.Migrations
 {
     [DbContext(typeof(AngularEDotNetContext))]
-    [Migration("20240828020152_Add")]
-    partial class Add
+    [Migration("20240903185930_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,7 +86,7 @@ namespace AngularEDotNet.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Refresh Token");
 
-                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
                         .HasColumnType("datetime2")
                         .HasColumnName("Refresh Token Expiry Time");
 

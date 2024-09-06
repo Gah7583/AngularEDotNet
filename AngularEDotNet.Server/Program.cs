@@ -32,14 +32,6 @@ builder.Services.AddMvc(options =>
     options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
 });
 
-//CORS
-builder.Services.AddCors(options => options.AddDefaultPolicy(builder =>
-{
-    builder.AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader();
-}));
-
 //TOKEN
 var tokenConfigurations = new TokenConfiguration();
 new ConfigureFromConfigurationOptions<TokenConfiguration>
@@ -72,6 +64,15 @@ builder.Services.AddAuthorizationBuilder()
         .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
         .RequireAuthenticatedUser().Build());
 
+
+//CORS
+builder.Services.AddCors(options => options.AddDefaultPolicy(builder =>
+{
+    builder.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+}));
+
 //Add services to the container.
 builder.Services.AddControllers();
 
@@ -86,6 +87,7 @@ builder.Services.AddScoped<ITarefaRepository, TarefaRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddApiVersioning();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -104,9 +106,6 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-app.UseDefaultFiles();
-app.UseStaticFiles();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -124,16 +123,15 @@ var option = new RewriteOptions();
 option.AddRedirect("^$", "swagger");
 app.UseRewriter(option);
 
+//CORS
+app.UseCors();
+
 app.UseAuthorization();
 
 app.MapControllers();
 //Route HATEOAS
-app.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
-
+app.MapControllerRoute("DefaultApi", "{controller=values}/v{version=ApiVersion}/{id?}");
 
 app.MapFallbackToFile("/index.html");
-
-//CORS
-app.UseCors();
 
 app.Run();
