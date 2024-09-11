@@ -11,8 +11,8 @@ namespace AngularEDotNet.Domain.Interfaces
 
         Task<IList<TEntity>> Get();
 
-        Task<TEntity> GetById(Guid id);
+        Task<TEntity?> GetById(Guid id);
 
-        Task<TEntity> Update<TValidator>(TEntity obj) where TValidator : AbstractValidator<TEntity>;
+        TEntity Update<TValidator>(TEntity obj) where TValidator : AbstractValidator<TEntity>;
     }
 }

@@ -14,7 +14,7 @@ export class TarefaDetalheComponent implements OnInit {
   form: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.maxLength(100)]),
     descricao: new FormControl('', [Validators.required, Validators.maxLength(200)]),
-    dataDeRealizacao: new FormControl('', Validators.required)
+    dataDeRealizacao: new FormControl('', [Validators.required, this.dateValidator])
   });
   constructor(private activatedRoute: ActivatedRoute, private tarefaServico: TarefaServico, private router: Router) { }
 
@@ -40,6 +40,15 @@ export class TarefaDetalheComponent implements OnInit {
       );
       this.router.navigate(['/tarefas/lista']);
     }
+  }
+
+  dateValidator(control: any) {
+    const today = new Date();
+    const inputDate = new Date(control.value);
+    if (control.value && inputDate < today) {
+      return { pastDate: true };
+    }
+    return null;
   }
 
   ngOnInit(): void { this.carregarTarefa() }

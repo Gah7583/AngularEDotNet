@@ -18,7 +18,7 @@ namespace AngularEDotNet.Server.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [MapToApiVersion("1")]
-        public async Task<IActionResult> PostAsync([Bind("Email,Senha")] Usuario model)
+        public IActionResult Post([Bind("Email,Senha")] Usuario model)
         {
             try
             {
@@ -64,11 +64,11 @@ namespace AngularEDotNet.Server.Controllers
         [ProducesResponseType(401)]
         [MapToApiVersion("1")]
         [Authorize("Bearer")]
-        public async Task<IActionResult> PutAsync([Bind("")]Usuario model)
+        public IActionResult Put([Bind("")] Usuario model)
         {
             try
             {
-                var usuario = await _usuarioService.Update<UsuarioValidator>(model);
+                var usuario = _usuarioService.Update<UsuarioValidator>(model);
                 if (usuario == null) return BadRequest("Erro ao tentar atualizar usuário.");
 
                 return Ok(usuario);

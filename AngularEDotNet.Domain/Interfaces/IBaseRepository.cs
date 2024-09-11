@@ -12,6 +12,6 @@ namespace AngularEDotNet.Domain.Interfaces
 
         Task<IList<TEntity>> SelectAsync();
 
-        Task<TEntity> Select(Guid id);
+        Task<TEntity?> Select(Guid id);
     }
 }

@@ -45,12 +45,14 @@ namespace AngularEDotNet.Service.Services
             return userData;
         }
 
-        public Token ValidateCredentials(Token token)
+        public Token? ValidateCredentials(Token token)
         {
             var accessToken = token.AcessToken;
             var refreshToken = token.RefreshToken;
 
             var principal = _tokenService.GetPrincipalFromExpiredToken(accessToken);
+            if (principal.Identity == null) return null;
+            if (principal.Identity.Name == null) return null;
 
             var email = principal.Identity.Name;
 

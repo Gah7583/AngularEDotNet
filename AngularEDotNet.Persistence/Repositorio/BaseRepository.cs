@@ -11,7 +11,11 @@ namespace AngularEDotNet.Infra.Data.Repositorio
 
         public async Task<bool> Delete(Guid id)
         {
-            _context.Set<TEntity>().Remove(await Select(id));
+            var result = await Select(id);
+            if (result != null)
+            {
+                _context.Set<TEntity>().Remove(result);
+            }
             return (await _context.SaveChangesAsync()) > 0;
         }
 
@@ -23,7 +27,12 @@ namespace AngularEDotNet.Infra.Data.Repositorio
 
         public async Task<IList<TEntity>> SelectAsync() => await _context.Set<TEntity>().ToListAsync();
 
-        public async Task<TEntity> Select(Guid id) => await _context.Set<TEntity>().FindAsync(id);
+        public async Task<TEntity?> Select(Guid id)
+        {
+            var result = await _context.Set<TEntity>().FindAsync(id);
+            if (result != null) return result;
+            else return null;
+        }
 
         public void Update(TEntity obj)
         {

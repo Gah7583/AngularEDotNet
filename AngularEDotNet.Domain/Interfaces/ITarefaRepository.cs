@@ -4,7 +4,7 @@ namespace AngularEDotNet.Domain.Interfaces
 {
     public interface ITarefaRepository : IBaseRepository<Tarefa>
     {
-        Tarefa Concluir(Guid id);
+        Tarefa? Concluir(Guid id);
 
         Task<Tarefa[]> GetTarefasByUsuarioId(Guid id);
     }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AngularEDotNet.Infra.Data.Migrations
 {
     [DbContext(typeof(AngularEDotNetContext))]
-    [Migration("20240903185930_Initial")]
+    [Migration("20240910103507_initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -100,6 +100,9 @@ namespace AngularEDotNet.Infra.Data.Migrations
                         .HasColumnName("Telefone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
                 });

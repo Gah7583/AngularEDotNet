@@ -10,6 +10,8 @@ namespace AngularEDotNet.Persistence.Contexto
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Usuario>().HasIndex(u => u.Email).IsUnique();
+
             base.OnModelCreating(modelBuilder);
         }
     }

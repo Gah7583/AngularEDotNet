@@ -9,7 +9,7 @@ namespace AngularEDotNet.Infra.Data.Repositorio
     public class TarefaRepository(AngularEDotNetContext angularEDotNetContext) : BaseRepository<Tarefa>(angularEDotNetContext), ITarefaRepository
     {
 
-        public Tarefa Concluir(Guid id)
+        public Tarefa? Concluir(Guid id)
         {
             try
             {
