@@ -1,6 +1,6 @@
 ﻿using AngularEDotNet.Domain.Entidades;
 using AngularEDotNet.Domain.Interfaces;
-using AngularEDotNet.Persistence.Contexto;
+using AngularEDotNet.Infra.Data.Contexto;
 
 namespace AngularEDotNet.Infra.Data.Repositorio
 {

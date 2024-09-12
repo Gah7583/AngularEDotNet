@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,30 +25,32 @@ import { TarefaCriarComponent } from './components/tarefas/tarefa-criar/tarefa-c
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { AutenticacaoServico } from './servicos/autenticacao.servico';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    TarefasComponent,
-    AtualizacaoComponent,
-    NavComponent,
-    TarefaDetalheComponent,
-    TarefaListaComponent,
-    CadastroComponent,
-    TarefaCriarComponent,
-    UsuarioComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    CollapseModule.forRoot(),
+@NgModule({ declarations: [
+        AppComponent,
+        LoginComponent,
+        TarefasComponent,
+        AtualizacaoComponent,
+        NavComponent,
+        TarefaDetalheComponent,
+        TarefaListaComponent,
+        CadastroComponent,
+        TarefaCriarComponent,
+        UsuarioComponent
+    ],
+  bootstrap: [AppComponent],
+  imports: [BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        CollapseModule.forRoot(),
     BsDropdownModule.forRoot()
   ],
-  providers: [TarefaServico, UsuarioServico, AutenticacaoServico],
-  bootstrap: [AppComponent]
+  providers: [
+    TarefaServico,
+    UsuarioServico,
+    AutenticacaoServico,
+    provideHttpClient(withInterceptorsFromDi())
+  ]
 })
 export class AppModule { }

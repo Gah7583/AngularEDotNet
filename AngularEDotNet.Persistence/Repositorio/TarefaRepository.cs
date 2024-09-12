@@ -1,8 +1,8 @@
 ﻿using AngularEDotNet.Domain.Entidades;
-using AngularEDotNet.Persistence.Contexto;
 using AngularEDotNet.Domain.Enums;
 using AngularEDotNet.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using AngularEDotNet.Infra.Data.Contexto;
 
 namespace AngularEDotNet.Infra.Data.Repositorio
 {

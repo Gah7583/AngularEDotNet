@@ -1,7 +1,7 @@
 ﻿using AngularEDotNet.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 
-namespace AngularEDotNet.Persistence.Contexto
+namespace AngularEDotNet.Infra.Data.Contexto
 {
     public class AngularEDotNetContext(DbContextOptions<AngularEDotNetContext> options) : DbContext(options)
     {
@@ -10,7 +10,7 @@ namespace AngularEDotNet.Persistence.Contexto
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Usuario>().HasIndex(u => new {u.Email}).IsUnique(true);
+            modelBuilder.Entity<Usuario>().HasIndex(u => new { u.Email }).IsUnique(true);
             base.OnModelCreating(modelBuilder);
         }
     }

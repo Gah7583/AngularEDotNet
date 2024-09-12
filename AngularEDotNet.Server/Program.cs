@@ -1,7 +1,7 @@
 using AngularEDotNet.Domain.Entidades;
 using AngularEDotNet.Domain.Interfaces;
+using AngularEDotNet.Infra.Data.Contexto;
 using AngularEDotNet.Infra.Data.Repositorio;
-using AngularEDotNet.Persistence.Contexto;
 using AngularEDotNet.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
