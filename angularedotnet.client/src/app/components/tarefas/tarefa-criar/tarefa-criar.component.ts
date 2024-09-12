@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Tarefa } from '../../../interfaces/Tarefa';
 import { TarefaServico } from '../../../servicos/tarefa.servico';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tarefa-criar',
@@ -20,15 +21,15 @@ export class TarefaCriarComponent implements OnInit {
 
   public salvarAlteracao(): void {
     if (this.form.valid) {
+      const observer = {
+        next: () => this.toastr.success('Tarefa criada como sucesso', 'Criada'),
+        error: (error: any) => console.log(error),
+        complete: () => this.router.navigate(['/tarefas/lista'])
+      }
+
       this.tarefa = { ... this.form.value };
       this.tarefa.usuarioId = localStorage.getItem('userId');
-      this.tarefaServico.postTarefa(this.tarefa).subscribe(
-        (response) => console.log(response),
-        (error: any) => {
-          console.log(error);
-        }
-      );
-      this.router.navigate(['/tarefas/lista']);
+      this.tarefaServico.postTarefa(this.tarefa).subscribe(observer);
     }
   }
 
@@ -41,7 +42,11 @@ export class TarefaCriarComponent implements OnInit {
     return null;
   }
 
-  constructor(private tarefaServico: TarefaServico, private router: Router) { }
+  constructor(
+    private tarefaServico: TarefaServico,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void { }
 }

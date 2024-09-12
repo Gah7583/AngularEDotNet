@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Usuario } from '../../../interfaces/Usuario';
 import { UsuarioServico } from '../../../servicos/usuario.servico';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-atualizacao',
@@ -20,7 +21,11 @@ export class AtualizacaoComponent implements OnInit {
     genero: new FormControl()
   });
 
-  constructor(private activetedRouter: ActivatedRoute, private usuarioServico: UsuarioServico, private router: Router) { }
+  constructor(
+    private toastr: ToastrService,
+    private usuarioServico: UsuarioServico,
+    private router: Router
+  ) { }
 
   public carregarUsuario(): void {
     this.usuarioServico.getUsuario(localStorage.getItem('userId')).subscribe((usuario: Usuario) => {
@@ -31,9 +36,14 @@ export class AtualizacaoComponent implements OnInit {
 
   public salvarAlteracao(): void {
     if (this.form.valid) {
+      const observer = {
+        next: () => this.toastr.success('Usuário atualizado com sucesso', 'Atualizado!'),
+        error: (error: any) => console.log(error),
+        complete: () => this.router.navigate(['/usuario/atualizacao'])
+      }
+
       this.usuario = { ... this.usuario, ... this.form.value };
-      this.usuarioServico.putUsuario(this.usuario).subscribe((response) => console.log(response), (error: any) => console.log(error));
-      this.router.navigate(['/usuario/atualizacao']);
+      this.usuarioServico.putUsuario(this.usuario).subscribe(observer);
     }
   }
 

@@ -20,14 +20,14 @@ export class LoginComponent implements OnInit {
 
   public logar(): void {
     if (this.form.valid) {
+      const observer = {
+        next: () => this.toastr.success('Login feito com sucesso', 'Logado!'),
+        error: (error: any) => console.log(error),
+        complete: () => this.router.navigate(['/tarefas/lista'])
+      }
+
       this.usuario = { ... this.form.value };
-      this.autenticacaoServico.login(this.usuario).subscribe(
-        (response) => {
-          if (response !== null) {
-            this.router.navigate(['/tarefas/lista']);
-          }
-        }
-      );
+      this.autenticacaoServico.login(this.usuario).subscribe(observer)
     }
   }
 

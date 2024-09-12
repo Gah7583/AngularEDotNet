@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators, } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from '../../../interfaces/Usuario';
 import { UsuarioServico } from '../../../servicos/usuario.servico';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastro',
@@ -19,16 +20,22 @@ export class CadastroComponent implements OnInit {
 
   public salvarUsuario(): void {
     if (this.form.valid) {
+      const observer = {
+        next: () => this.toastr.success('Usuário criado com sucesso', "Criado"),
+        error: (error: any) => console.log(error),
+        complete: () => this.router.navigate(['/usuario/logar'])
+      }
+
       this.usuario = { ... this.form.value };
-      this.usuarioServico.postUsuario(this.usuario).subscribe(
-        (response) => console.log(response),
-        (error: any) => console.log(error)
-      );
-      this.router.navigate(['/usuario/logar']);
+      this.usuarioServico.postUsuario(this.usuario).subscribe(observer);
     }
   }
 
-  constructor(private usuarioServico: UsuarioServico, private router: Router) { }
+  constructor(
+    private usuarioServico: UsuarioServico,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void { }
 }

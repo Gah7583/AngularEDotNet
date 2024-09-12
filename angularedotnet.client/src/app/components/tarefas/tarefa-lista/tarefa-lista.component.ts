@@ -35,9 +35,7 @@ export class TarefaListaComponent implements OnInit {
 
   public getTarefasByUsuarioId(id: any): void {
     const observer = {
-      next: (tarefas: Tarefa[]) => {
-        this.tarefas = tarefas;
-      },
+      next: (tarefas: Tarefa[]) => this.tarefas = tarefas,
       error: (error: any) => console.log(error)
     };
     this.tarefaServico.getTarefasByUsuarioId(id).subscribe(observer);
@@ -45,22 +43,18 @@ export class TarefaListaComponent implements OnInit {
 
   public patchTarefa(id: any): void {
     const observer = {
-      next: () => {
-        this.toastr.success('Tarefa concluída com sucesso.', 'Concluído!');
-        this.getTarefasByUsuarioId(localStorage.getItem('userId'));
-      },
-      error: (error: any) => console.log(error)
+      next: () => this.toastr.success('Tarefa concluída com sucesso.', 'Concluída!'),
+      error: (error: any) => console.log(error),
+      complete: () => this.getTarefasByUsuarioId(localStorage.getItem('userId'))
     };
     this.tarefaServico.patchTarefa(id).subscribe(observer);
   }
 
   public deleteTarefa(id: any): void {
     const observer = {
-      next: () => {
-        this.toastr.success('Tarefa deletada com sucesso.', 'Deletado!');
-        this.getTarefasByUsuarioId(localStorage.getItem('userId'));
-      },
-      error: (error: any) => console.log(error)
+      next: () => this.toastr.success('Tarefa deletada com sucesso.', 'Deletada!'),
+      error: (error: any) => console.log(error),
+      complete: () => this.getTarefasByUsuarioId(localStorage.getItem('userId'))
     };
     this.tarefaServico.deleteTarefa(id).subscribe(observer);
   }
