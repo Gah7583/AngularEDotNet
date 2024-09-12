@@ -38,7 +38,7 @@ export class AtualizacaoComponent implements OnInit {
   }
 
   phoneValidator(control: any) {
-    const phonePattern = /^\(\d{ 2 } \) \d{ 5 } -\d{ 4 } $/;
+    const phonePattern = /^\(\d{2}\)\d{5}-\d{4}$/;
     if (!control.value || phonePattern.test(control.value)) {
       return null;
     }
