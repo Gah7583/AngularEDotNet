@@ -13,11 +13,11 @@ export class AtualizacaoComponent implements OnInit {
   usuario = {} as Usuario;
 
   form: FormGroup = new FormGroup({
-    email: new FormControl([Validators.required, Validators.email, Validators.maxLength(320)]),
-    senha: new FormControl([Validators.required, Validators.minLength(8)]),
-    telefone: new FormControl(),
-    dataDeNascimento: new FormControl(),
-    genero: new FormControl(),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(320)]),
+    senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    telefone: new FormControl('', this.phoneValidator),
+    dataDeNascimento: new FormControl('', this.dateValidator),
+    genero: new FormControl()
   });
 
   constructor(private activetedRouter: ActivatedRoute, private usuarioServico: UsuarioServico, private router: Router) { }
@@ -35,6 +35,23 @@ export class AtualizacaoComponent implements OnInit {
       this.usuarioServico.putUsuario(this.usuario).subscribe((response) => console.log(response), (error: any) => console.log(error));
       this.router.navigate(['/usuario/atualizacao']);
     }
+  }
+
+  phoneValidator(control: any) {
+    const phonePattern = /^\(\d{ 2 } \) \d{ 5 } -\d{ 4 } $/;
+    if (!control.value || phonePattern.test(control.value)) {
+      return null;
+    }
+    return { invalidPhone: true };
+  }
+
+  dateValidator(control: any) {
+    const today = new Date();
+    const inputDate = new Date(control.value);
+    if (control.value && inputDate < today) {
+      return null;
+    }
+    return { futureDate: true };
   }
 
   ngOnInit(): void { this.carregarUsuario() }

@@ -8,7 +8,7 @@ namespace AngularEDotNet.Infra.Data.Repositorio
     {
         private readonly AngularEDotNetContext _context = context;
 
-        public Usuario RefreshUserInfo(Usuario user)
+        public Usuario? RefreshUserInfo(Usuario user)
         {
             if (!_context.Usuarios.Any(u => u.Id.Equals(user.Id))) return null;
             var result = _context.Usuarios.SingleOrDefault(p => p.Id.Equals(user.Id));
@@ -36,12 +36,12 @@ namespace AngularEDotNet.Infra.Data.Repositorio
             return true;
         }
 
-        public Usuario ValidateCredentials(Usuario usuario)
+        public Usuario? ValidateCredentials(Usuario usuario)
         {
             return _context.Usuarios.FirstOrDefault(u => (u.Email == usuario.Email) && (u.Senha == usuario.Senha));
         }
 
-        public Usuario ValidateCredentials(string userEmail)
+        public Usuario? ValidateCredentials(string userEmail)
         {
             return _context.Usuarios.SingleOrDefault(u => u.Email == userEmail);
         }

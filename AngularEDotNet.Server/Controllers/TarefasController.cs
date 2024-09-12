@@ -66,7 +66,7 @@ namespace AngularEDotNet.Server.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [MapToApiVersion("1")]
-        public async Task<IActionResult> PostAsync(Tarefa model)
+        public IActionResult Post(Tarefa model)
         {
             try
             {
@@ -89,11 +89,11 @@ namespace AngularEDotNet.Server.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [MapToApiVersion("1")]
-        public async Task<IActionResult> PutAsync([Bind("Id,Nome,Descricao,DataDeRealizacao,Status,usuarioId")] Tarefa model)
+        public IActionResult Put([Bind("Id,Nome,Descricao,DataDeRealizacao,Status,usuarioId")] Tarefa model)
         {
             try
             {
-                var tarefa = await _tarefaService.Update<TarefaValidator>(model);
+                var tarefa = _tarefaService.Update<TarefaValidator>(model);
                 if (tarefa == null) return BadRequest("Erro ao tentar atualizar tarefa.");
 
                 return Ok(tarefa);

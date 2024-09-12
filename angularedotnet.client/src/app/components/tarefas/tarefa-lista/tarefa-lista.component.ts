@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Tarefa } from '../../../interfaces/Tarefa';
 import { TarefaServico } from '../../../servicos/tarefa.servico';
 
@@ -16,6 +17,7 @@ export class TarefaListaComponent implements OnInit {
 
   constructor(
     private tarefaServico: TarefaServico,
+    private toastr: ToastrService
   ) { }
 
   public tarefas: Tarefa[] = [];
@@ -42,17 +44,25 @@ export class TarefaListaComponent implements OnInit {
   }
 
   public patchTarefa(id: any): void {
-    this.tarefaServico.patchTarefa(id).subscribe(
-      (response) => console.log(response)
-    );
-    this.getTarefasByUsuarioId(localStorage.getItem('userId'));
+    const observer = {
+      next: () => {
+        this.toastr.success('Tarefa concluída com sucesso.', 'Concluído!');
+        this.getTarefasByUsuarioId(localStorage.getItem('userId'));
+      },
+      error: (error: any) => console.log(error)
+    };
+    this.tarefaServico.patchTarefa(id).subscribe(observer);
   }
 
   public deleteTarefa(id: any): void {
-    this.tarefaServico.deleteTarefa(id).subscribe(
-      (response) => console.log(response)
-    );
-    this.getTarefasByUsuarioId(localStorage.getItem('userId'));
+    const observer = {
+      next: () => {
+        this.toastr.success('Tarefa deletada com sucesso.', 'Deletado!');
+        this.getTarefasByUsuarioId(localStorage.getItem('userId'));
+      },
+      error: (error: any) => console.log(error)
+    };
+    this.tarefaServico.deleteTarefa(id).subscribe(observer);
   }
 
 }

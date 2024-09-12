@@ -98,6 +98,9 @@ namespace AngularEDotNet.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.ToTable("Usuarios");
                 });
 #pragma warning restore 612, 618

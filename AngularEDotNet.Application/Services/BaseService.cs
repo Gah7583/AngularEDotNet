@@ -19,16 +19,24 @@ namespace AngularEDotNet.Service.Services
 
         public async Task<IList<TEntity>> Get() => await _baseRepository.SelectAsync();
 
-        public async Task<TEntity> GetById(Guid id) => await _baseRepository.Select(id);
+        public async Task<TEntity?> GetById(Guid id)
+        {
+            var result = await _baseRepository.Select(id);
+            if (result != null)
+            {
+                return result;
+            }
+            return null;
+        }
 
-        public async Task<TEntity> Update<TValidator>(TEntity obj) where TValidator : AbstractValidator<TEntity>
+        public TEntity Update<TValidator>(TEntity obj) where TValidator : AbstractValidator<TEntity>
         {
             BaseService<TEntity>.Validate(obj, Activator.CreateInstance<TValidator>());
             _baseRepository.Update(obj);
             return obj;
         }
 
-        private static async void Validate(TEntity obj, AbstractValidator<TEntity> validator)
+        private static void Validate(TEntity obj, AbstractValidator<TEntity> validator)
         {
             if (obj == null) throw new Exception("Registros não detectados!");
             validator.ValidateAndThrow(obj);

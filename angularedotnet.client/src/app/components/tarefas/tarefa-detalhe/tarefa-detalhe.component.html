@@ -16,6 +16,7 @@
             <label for="dataDeRealizacao">Data de Realização</label>
             <input type="date" class="form-control" [ngClass]="{'is-invalid': form.get('dataDeRealizacao')?.errors && form.get('dataDeRealizacao')?.touched}" id="dataDeRealizacao" formControlName="dataDeRealizacao" placeholder="Insira a data de realização">
             <small *ngIf="form.get('dataDeRealizacao')?.hasError('required')" class="invalid-feedback">Data de realização é obrigatória.</small>
+            <small *ngIf="form.get('dataDeRealizacao')?.hasError('pastDate')" class="invalid-feedback">Data de realização tem que estar no futuro</small>
         </div>
         <button type="submit" class="btn btn-primary m-5" routerLink="/tarefas/lista">Voltar</button>
         <button (click)="salvarAlteracao()" type="submit" class="btn btn-success">Salvar</button>

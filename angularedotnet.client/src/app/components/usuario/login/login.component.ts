@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Usuario } from '../../../interfaces/Usuario';
+import { ToastrService } from 'ngx-toastr';
 import { AutenticacaoServico } from '../../../servicos/autenticacao.servico';
+import { Usuario } from '../../../interfaces/Usuario';
 
 @Component({
   selector: 'app-login',
@@ -25,12 +26,16 @@ export class LoginComponent implements OnInit {
           if (response !== null) {
             this.router.navigate(['/tarefas/lista']);
           }
-}
+        }
       );
     }
   }
 
-  constructor(private autenticacaoServico: AutenticacaoServico, private router: Router) { }
+  constructor(
+    private autenticacaoServico: AutenticacaoServico,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 }

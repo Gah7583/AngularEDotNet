@@ -10,12 +10,12 @@ namespace AngularEDotNet.Domain.Entidades
         [Column("Nome")]
         [Required(ErrorMessage = "Nome necessário.")]
         [StringLength(100)]
-        public string Nome { get; set; }
+        public required string Nome { get; set; }
 
         [Column("Descricao")]
         [Required(ErrorMessage = "Descrição necessária.")]
         [StringLength(200)]
-        public string Descricao { get; set; }
+        public required string Descricao { get; set; }
 
         [Column("Data de Realizacao")]
         [Required(ErrorMessage = "Data de realização necessária.")]

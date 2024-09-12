@@ -2,26 +2,28 @@
     <form [formGroup]="form">
         <div class="form-group">
             <label for="email">Email:</label>
-            <input formControlName="email" [ngClass]="{'is-invalid': form.get('email')?.errors && form.get('email')?.touched}" type="email" class="form-control mb-3" id="email" placeholder="Insira o email">
+            <input formControlName="email" [ngClass]="{'is-invalid': form.get('email')?.errors && form.get('email')?.touched}" type="email" class="form-control" id="email" placeholder="Insira o email">
             <small *ngIf="form.get('email')?.hasError('required')" class="invalid-feedback">E-mail é obrigatório.</small>
             <small *ngIf="form.get('email')?.hasError('email')" class="invalid-feedback">Necessita ser um e-mail válido.</small>
             <small *ngIf="form.get('email')?.hasError('maxlength')" class="invalid-feedback">E-mail deve ter no máximo 320 caracteres.</small>
         </div>
-        <div class="form-group">
+        <div class="form-group mt-3">
             <label for="senha">Senha:</label>
-            <input formControlName="senha" [ngClass]="{'is-invalid': form.get('senha')?.errors && form.get('senha')?.touched}" type="password" class="form-control mb-3" id="senha" placeholder="Insira a senha">
+            <input formControlName="senha" [ngClass]="{'is-invalid': form.get('senha')?.errors && form.get('senha')?.touched}" type="password" class="form-control" id="senha" placeholder="Insira a senha">
             <small *ngIf="form.get('senha')?.hasError('required')" class="invalid-feedback">Senha é obrigatória</small>
             <small *ngIf="form.get('senha')?.hasError('minlength')" class="invalid-feedback">Senha deve ter no mínimo 8 caracteres</small>
         </div>
-        <div class="form-group">
+        <div class="form-group mt-3">
             <label for="telefone">Telefone:</label>
-            <input formControlName="telefone" type="text" class="form-control mb-3" id="telefone" placeholder="Insira a telefone">
+            <input formControlName="telefone" [ngClass]="{'is-invalid': form.get('telefone')?.errors && form.get('telefone')?.touched}" type="text" class="form-control" id="telefone" placeholder="Insira a telefone">
+            <small *ngIf="form.get('telefone')?.hasError('invalidPhone')" class="invalid-feedback">O telefone deve estar no formato (00)00000-0000.</small>
         </div>
-        <div class="form-group">
+        <div class="form-group mt-3">
             <label for="dataDeNascimento">Data de Nascimento:</label>
-            <input formControlName="dataDeNascimento" type="date" class="form-control mb-3" id="dataDeNascimento" placeholder="Insira a data de nascimento">
+            <input formControlName="dataDeNascimento" [ngClass]="{'is-invalid': form.get('dataDeNascimento')?.errors && form.get('dataDeNascimento')?.touched}" type="date" class="form-control" id="dataDeNascimento">
+            <small *ngIf="form.get('dataDeNascimento')?.hasError('futureDate')" class="invalid-feedback">A data não pode estar no futuro</small>
         </div>
-        <div class="form-group">
+        <div class="form-group mt-3">
             <label for="genero">Gênero:</label>
             <select formControlName="genero" class="form-control mb-3" id="genero">
                 <option value="1">Masculino</option>

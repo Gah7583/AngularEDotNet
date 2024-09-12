@@ -36,10 +36,15 @@ namespace AngularEDotNet.Server.Controllers
         [Authorize("Bearer")]
         public IActionResult Revoke()
         {
-            var userEmail = User.Identity.Name;
-            var result = _autenticacaoService.RevokeToken(userEmail);
-
-            if (!result) return BadRequest("Requisição inválida");
+            if (User.Identity != null)
+            {
+                var userEmail = User.Identity.Name;
+                if (userEmail != null)
+                {
+                    var result = _autenticacaoService.RevokeToken(userEmail);
+                    if (!result) return BadRequest("Requisição inválida");
+                }
+            }
             return NoContent();
         }
     }

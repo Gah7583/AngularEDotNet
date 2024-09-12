@@ -20,6 +20,7 @@ namespace AngularEDotNet.Domain.Entidades
         public string Senha { get; set; }
 
         [Column("Telefone")]
+        [MaxLength(14, ErrorMessage = "{0} deve ter no máximo 14 caracteres")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "O campo {0} está com número inválido")]
         public string? Telefone { get; set; }
 

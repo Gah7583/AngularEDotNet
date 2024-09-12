@@ -7,9 +7,14 @@ namespace AngularEDotNet.Service.Services
     {
         private readonly ITarefaRepository _tarefaRepository = tarefaRepository;
 
-        public Tarefa Concluir(Guid id)
+        public Tarefa? Concluir(Guid id)
         {
-            return _tarefaRepository.Concluir(id);
+            var result = _tarefaRepository.Concluir(id);
+            if (result != null)
+            {
+                return result;
+            }
+            return null;
         }
 
         public async Task<Tarefa[]> GetByUsuarioId(Guid id)
