@@ -37,9 +37,11 @@ export class AtualizacaoComponent implements OnInit {
   public salvarAlteracao(): void {
     if (this.form.valid) {
       const observer = {
-        next: () => this.toastr.success('Usuário atualizado com sucesso', 'Atualizado!'),
+        next: () => {
+          this.toastr.success('Usuário atualizado com sucesso', 'Atualizado!');
+          this.router.navigate(['/tarefas/lista'])
+        },
         error: (error: any) => console.log(error),
-        complete: () => this.router.navigate(['/usuario/atualizacao'])
       }
 
       this.usuario = { ... this.usuario, ... this.form.value };

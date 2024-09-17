@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { AutenticacaoServico } from '../../../servicos/autenticacao.servico';
 import { Usuario } from '../../../interfaces/Usuario';
 
@@ -20,21 +19,19 @@ export class LoginComponent implements OnInit {
 
   public logar(): void {
     if (this.form.valid) {
-      const observer = {
-        next: () => this.toastr.success('Login feito com sucesso', 'Logado!'),
-        error: (error: any) => console.log(error),
-        complete: () => this.router.navigate(['/tarefas/lista'])
-      }
-
       this.usuario = { ... this.form.value };
-      this.autenticacaoServico.login(this.usuario).subscribe(observer)
+      this.autenticacaoServico.login(this.usuario).subscribe(
+        (response) => {
+          if (response !== null) {
+            this.router.navigate(['/tarefas/lista']);
+          }
+        })
     }
   }
 
   constructor(
     private autenticacaoServico: AutenticacaoServico,
-    private router: Router,
-    private toastr: ToastrService
+    private router: Router
   ) { }
 
   ngOnInit(): void { }

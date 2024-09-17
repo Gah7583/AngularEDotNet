@@ -21,9 +21,11 @@ export class CadastroComponent implements OnInit {
   public salvarUsuario(): void {
     if (this.form.valid) {
       const observer = {
-        next: () => this.toastr.success('Usuário criado com sucesso', "Criado"),
-        error: (error: any) => console.log(error),
-        complete: () => this.router.navigate(['/usuario/logar'])
+        next: () => {
+          this.toastr.success('Usuário criado com sucesso', "Criado");
+          this.router.navigate(['/usuario/logar'])
+        },
+        error: (error: any) => console.log(error)
       }
 
       this.usuario = { ... this.form.value };

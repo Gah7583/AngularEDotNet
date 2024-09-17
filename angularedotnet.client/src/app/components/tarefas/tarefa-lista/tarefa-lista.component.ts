@@ -43,18 +43,21 @@ export class TarefaListaComponent implements OnInit {
 
   public patchTarefa(id: any): void {
     const observer = {
-      next: () => this.toastr.success('Tarefa concluída com sucesso.', 'Concluída!'),
-      error: (error: any) => console.log(error),
-      complete: () => this.getTarefasByUsuarioId(localStorage.getItem('userId'))
+      next: () => {
+        this.toastr.success('Tarefa concluída com sucesso.', 'Concluída!');
+        this.getTarefasByUsuarioId(localStorage.getItem('userId')) },
+      error: (error: any) => console.log(error)
     };
     this.tarefaServico.patchTarefa(id).subscribe(observer);
   }
 
   public deleteTarefa(id: any): void {
     const observer = {
-      next: () => this.toastr.success('Tarefa deletada com sucesso.', 'Deletada!'),
-      error: (error: any) => console.log(error),
-      complete: () => this.getTarefasByUsuarioId(localStorage.getItem('userId'))
+      next: () => {
+        this.toastr.success('Tarefa deletada com sucesso.', 'Deletada!');
+        this.getTarefasByUsuarioId(localStorage.getItem('userId'))
+      },
+      error: (error: any) => console.log(error)
     };
     this.tarefaServico.deleteTarefa(id).subscribe(observer);
   }
