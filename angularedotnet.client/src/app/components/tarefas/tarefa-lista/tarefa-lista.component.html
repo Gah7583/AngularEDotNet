@@ -22,7 +22,7 @@
             <tr *ngFor="let tarefa of tarefas">
                 <td>{{tarefa.nome}}</td>
                 <td>{{tarefa.descricao}}</td>
-                <td>{{tarefa.dataDeRealizacao}}</td>
+                <td>{{tarefa.dataDeRealizacao | DateFormatPipe}}</td>
                 <td *ngIf="tarefa.status === 1">Pendente</td>
                 <td *ngIf="tarefa.status === 2">Concluído</td>
                 <td>

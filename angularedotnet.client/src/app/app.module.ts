@@ -18,33 +18,37 @@ import { NavComponent } from './components/nav/nav.component';
 
 import { TarefaServico } from './servicos/tarefa.servico';
 import { UsuarioServico } from './servicos/usuario.servico';
+import { AutenticacaoServico } from './servicos/autenticacao.servico';
+
+import { DateFormatPipe } from './helpers/DateFormat.pipe';
 
 import { TarefaDetalheComponent } from './components/tarefas/tarefa-detalhe/tarefa-detalhe.component';
 import { TarefaListaComponent } from './components/tarefas/tarefa-lista/tarefa-lista.component';
 import { CadastroComponent } from './components/usuario/cadastro/cadastro.component';
 import { TarefaCriarComponent } from './components/tarefas/tarefa-criar/tarefa-criar.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
-import { AutenticacaoServico } from './servicos/autenticacao.servico';
 
-@NgModule({ declarations: [
-        AppComponent,
-        LoginComponent,
-        TarefasComponent,
-        AtualizacaoComponent,
-        NavComponent,
-        TarefaDetalheComponent,
-        TarefaListaComponent,
-        CadastroComponent,
-        TarefaCriarComponent,
-        UsuarioComponent
-    ],
+@NgModule({
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    TarefasComponent,
+    AtualizacaoComponent,
+    NavComponent,
+    TarefaDetalheComponent,
+    TarefaListaComponent,
+    CadastroComponent,
+    TarefaCriarComponent,
+    UsuarioComponent,
+    DateFormatPipe
+  ],
   bootstrap: [AppComponent],
   imports: [BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        AppRoutingModule,
-        CollapseModule.forRoot(),
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
