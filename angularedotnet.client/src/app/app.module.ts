@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CollapseModule } from 'ngx-bootstrap/collapse'
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -50,6 +51,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
     AppRoutingModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple'}),
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',

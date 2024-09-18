@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AutenticacaoServico } from '../../../servicos/autenticacao.servico';
 import { Usuario } from '../../../interfaces/Usuario';
+import { AutenticacaoServico } from '../../../servicos/autenticacao.servico';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -18,21 +20,30 @@ export class LoginComponent implements OnInit {
   });
 
   public logar(): void {
+    const observer = {
+      error: () => {
+        this.spinner.hide();
+        this.toastr.error('Usuário ou senha inválidos.', 'Erro!')
+      },
+      complete: () => {
+        this.spinner.hide();
+        this.toastr.success('Logado com sucesso.', 'Sucesso!');
+        if (localStorage.length !== 0) this.router.navigate(['/tarefas/lista']);
+      }
+    }
     if (this.form.valid) {
+      this.spinner.show()
       this.usuario = { ... this.form.value };
-      this.autenticacaoServico.login(this.usuario).subscribe(
-        (response) => {
-          if (response !== null) {
-            this.router.navigate(['/tarefas/lista']);
-          }
-        })
+      this.autenticacaoServico.login(this.usuario).subscribe(observer);
     }
   }
 
   constructor(
     private autenticacaoServico: AutenticacaoServico,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { localStorage.clear(); }
 }
