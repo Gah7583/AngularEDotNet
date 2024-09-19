@@ -19,14 +19,14 @@ export class TarefaCriarComponent implements OnInit {
     dataDeRealizacao: new FormControl('', [Validators.required, this.dateValidator])
   });
 
-  public salvarAlteracao(): void {
+  public salvar(): void {
     if (this.form.valid) {
       const observer = {
         next: () => {
           this.toastr.success('Tarefa criada como sucesso', 'Criada');
           this.router.navigate(['/tarefas/lista'])
         },
-        error: (error: any) => console.log(error)
+        error: () => this.toastr.error('Erro ao tentar alterar','Erro!'),
       }
 
       this.tarefa = { ... this.form.value };

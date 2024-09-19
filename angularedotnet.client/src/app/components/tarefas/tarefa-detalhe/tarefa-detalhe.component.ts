@@ -38,11 +38,11 @@ export class TarefaDetalheComponent implements OnInit {
   public salvarAlteracao(): void {
     if (this.form.valid) {
       const observer = {
-        next: () => {
+        error: () => this.toastr.error('Erro ao tentar alterar a tarefa','Erro!'),
+        complete: () => {
           this.toastr.success('Tarefa atualizada com sucesso', 'Atualizada!');
           this.router.navigate(['/tarefas/lista'])
-        },
-        error: (error: any) => console.log(error)
+        }
       }
 
       this.tarefa = { ...this.tarefa, ... this.form.value };

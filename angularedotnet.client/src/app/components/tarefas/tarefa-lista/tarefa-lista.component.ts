@@ -43,21 +43,22 @@ export class TarefaListaComponent implements OnInit {
 
   public patchTarefa(id: any): void {
     const observer = {
-      next: () => {
+      error: () => this.toastr.error('Erro ao tentar concluir tarefa', 'Erro!'),
+      complete: () => {
         this.toastr.success('Tarefa concluída com sucesso.', 'Concluída!');
-        this.getTarefasByUsuarioId(localStorage.getItem('userId')) },
-      error: (error: any) => console.log(error)
+        this.getTarefasByUsuarioId(localStorage.getItem('userId'))
+      }
     };
     this.tarefaServico.patchTarefa(id).subscribe(observer);
   }
 
   public deleteTarefa(id: any): void {
     const observer = {
-      next: () => {
+      error: () => this.toastr.error('Erro ao tentar deletar tarefa', 'Erro!'),
+      complete: () => {
         this.toastr.success('Tarefa deletada com sucesso.', 'Deletada!');
         this.getTarefasByUsuarioId(localStorage.getItem('userId'))
-      },
-      error: (error: any) => console.log(error)
+      }
     };
     this.tarefaServico.deleteTarefa(id).subscribe(observer);
   }

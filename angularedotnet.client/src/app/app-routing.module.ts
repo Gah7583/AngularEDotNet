@@ -7,6 +7,8 @@ import { TarefaDetalheComponent } from './components/tarefas/tarefa-detalhe/tare
 import { TarefaListaComponent } from './components/tarefas/tarefa-lista/tarefa-lista.component';
 import { TarefaCriarComponent } from './components/tarefas/tarefa-criar/tarefa-criar.component';
 
+import { AuthGuard } from './guard/auth.guard';
+
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { LoginComponent } from './components/usuario/login/login.component';
 import { CadastroComponent } from './components/usuario/cadastro/cadastro.component';
@@ -16,9 +18,9 @@ const routes: Routes = [
   {
     path: 'tarefas', component: TarefasComponent,
     children: [
-      { path: 'lista', component: TarefaListaComponent },
-      { path: 'detalhe/:id', component: TarefaDetalheComponent },
-      { path: 'criar', component: TarefaCriarComponent }
+      { path: 'lista', component: TarefaListaComponent, canActivate: [AuthGuard] },
+      { path: 'detalhe/:id', component: TarefaDetalheComponent, canActivate: [AuthGuard] },
+      { path: 'criar', component: TarefaCriarComponent, canActivate: [AuthGuard] }
     ]
   },
   { path: 'usuario', redirectTo: 'usuario/logar' },
@@ -27,7 +29,7 @@ const routes: Routes = [
     children: [
       { path: 'logar', component: LoginComponent },
       { path: 'cadastro', component: CadastroComponent },
-      { path: 'atualizacao', component: AtualizacaoComponent }
+      { path: 'atualizacao', component: AtualizacaoComponent, canActivate: [AuthGuard] }
     ]
   },
   { path: '', redirectTo: 'usuario/logar', pathMatch: 'full' },

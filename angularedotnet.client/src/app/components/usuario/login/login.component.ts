@@ -23,12 +23,14 @@ export class LoginComponent implements OnInit {
     const observer = {
       error: () => {
         this.spinner.hide();
-        this.toastr.error('Usuário ou senha inválidos.', 'Erro!')
+        this.toastr.error('Erro ao tentar logar', 'Erro!')
       },
       complete: () => {
         this.spinner.hide();
-        this.toastr.success('Logado com sucesso.', 'Sucesso!');
-        if (localStorage.length !== 0) this.router.navigate(['/tarefas/lista']);
+        if (localStorage.getItem('userId') !== null) {
+          this.toastr.success('Logado com sucesso.', 'Sucesso!');
+          this.router.navigate(['/tarefas/lista']);
+        } else this.toastr.error('Usuário ou senha inválidos.', 'Erro!')
       }
     }
     if (this.form.valid) {
